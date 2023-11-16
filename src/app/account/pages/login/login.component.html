@@ -1,1 +1,39 @@
-<p>login works!</p>
+<div class="content-center">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-subtitle>Enter your credentials</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" id="myForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email">
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="hasError('email', 'required')">Address is required</mat-error>
+          <mat-error *ngIf="hasError('email', 'email')">Invalid e-mail</mat-error>
+          <mat-error *ngIf="hasError('email', 'serverError')">
+            {{ this.form.controls['email'].errors?.['serverError'] }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-icon matSuffix>password</mat-icon>
+          <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button form="myForm" type="submit" mat-flat-button color="primary">Login</button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <button mat-button color="primary" routerLink="/register">Go to Register</button>
+    </mat-card-content>
+  </mat-card>
+</div>
