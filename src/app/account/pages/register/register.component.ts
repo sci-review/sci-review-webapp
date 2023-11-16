@@ -16,7 +16,7 @@ import {
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { RegisterService } from "../../services/register.service";
-import { HttpErrorResponse } from "@angular/common/http";
+import { handleServerErrors } from "../../../common/handler-error";
 
 @Component({
   selector: 'app-register',
@@ -57,15 +57,15 @@ export class RegisterComponent {
     }
     this.loading = true;
 
-    this.registerService.register(this.form.value).subscribe({
-      next: () => this.router.navigate(['/login']),
-      error: (error: HttpErrorResponse) => {
-        this.loading = false;
-        this.form.controls['email'].setErrors({ serverError: error.error.message });
-      }
-    })
+    this.registerService.register(this.form.value)
+      .subscribe({
+        next: () => this.router.navigate(['/login']),
+        error: (error) => {
+          this.loading = false;
+          handleServerErrors(error, this.form);
+        }
+      });
   }
-
   hasError(name: string, err: string) {
     return this.form.controls[name].hasError(err);
   }
