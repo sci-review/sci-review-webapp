@@ -19,5 +19,9 @@ export const appConfig: ApplicationConfig = {
         forbiddenErrorInterceptor,
       ])
     ),
+    {
+      provide: 'MAT_DATE_LOCALE',
+      useValue: 'en-US'
+    }
   ]
 };

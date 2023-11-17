@@ -7,6 +7,7 @@ import { ReviewListComponent } from "./dashboard/pages/review/review-list/review
 import { ReviewShowComponent } from "./dashboard/pages/review/review-show/review-show.component";
 import { ReviewFormComponent } from "./dashboard/pages/review/review-form/review-form.component";
 import { DashboardComponent } from "./dashboard/pages/dashboard/dashboard.component";
+import { InvestigationShowComponent } from "./review/pages/investigation-show/investigation-show.component";
 
 export const routes: Routes = [
   {
@@ -43,6 +44,15 @@ export const routes: Routes = [
         path: 'reviews/:reviewId',
         component: ReviewShowComponent,
       },
+      {
+        path: 'reviews/:reviewId/investigations/:investigationId',
+        component: InvestigationShowComponent,
+      },
+
     ]
   },
+  // {
+  //   path: 'reviews/:reviewId/investigations/:investigationId',
+  //   component: InvestigationShowComponent,
+  // }
 ];

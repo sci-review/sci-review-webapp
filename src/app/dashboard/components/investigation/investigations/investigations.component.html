@@ -1,0 +1,18 @@
+<div>
+  <p>Add new question for preliminary investigation</p>
+
+  <app-investigation-form [reviewId]="reviewId" [investigations]="investigations"></app-investigation-form>
+
+  <hr>
+  <mat-card *ngFor="let investigation of investigations()"
+            appearance="outlined"
+            routerLink="investigations/{{ investigation.id }}"
+            style="cursor: pointer;">
+    <mat-card-header>
+      <mat-card-title>{{ investigation.question }}</mat-card-title>
+      <mat-card-subtitle>{{ investigation.status }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+</div>

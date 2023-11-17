@@ -11,13 +11,15 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
+import { MatMenuModule } from "@angular/material/menu";
+import { InvestigationsComponent } from "../../../components/investigation/investigations/investigations.component";
 
 @Component({
   selector: 'app-review-show',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatIconModule, MatCardModule, MatButtonModule, RouterLink, MatTabsModule, MatSidenavModule, MatListModule],
+  imports: [CommonModule, MatToolbarModule, MatIconModule, MatCardModule, MatButtonModule, RouterLink, MatTabsModule, MatSidenavModule, MatListModule, MatMenuModule, InvestigationsComponent],
   templateUrl: './review-show.component.html',
-  styleUrl: './review-show.component.scss'
+  styleUrl: './review-show.component.scss',
 })
 export class ReviewShowComponent {
   appStoreService = inject(AppStoreService);

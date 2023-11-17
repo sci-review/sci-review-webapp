@@ -37,4 +37,29 @@ export interface Review {
   created_at: string;
   updated_at: string;
   reviewers: Reviewer[];
+  investigations: Investigation[];
+}
+
+
+export interface InvestigationForm {
+  question: string;
+}
+
+
+export interface Investigation {
+  id: string;
+  userId: string;
+  reviewId: string;
+  question: string;
+  status: InvestigationStatus;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+
+export enum InvestigationStatus {
+  InProgress = "InProgress",
+  Proceed = "Proceed",
+  DoNotProceed = "DoNotProceed",
+  Cancelled = "Cancelled",
 }

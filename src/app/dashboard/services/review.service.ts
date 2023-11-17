@@ -1,9 +1,9 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Signal, signal } from '@angular/core';
 import { BaseService } from "../../common/services/base.service";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
-import { Review, ReviewForm } from "../models/review.model";
+import { Investigation, InvestigationForm, Review, ReviewForm } from "../models/review.model";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,6 @@ import { Review, ReviewForm } from "../models/review.model";
 export class ReviewService extends BaseService {
   http = inject(HttpClient);
   apiUrl = environment.apiUrl + '/reviews';
-
   constructor() {
     super();
   }
@@ -26,5 +25,21 @@ export class ReviewService extends BaseService {
 
   show(reviewId: string): Observable<Review> {
     return this.http.get<Review>(this.apiUrl + '/' + reviewId, this.httpOptions);
+  }
+
+  newInvestigationQuestion(reviewId: string, investigationForm: InvestigationForm): Observable<Investigation> {
+    return this.http.post<Investigation>(
+      this.apiUrl + '/' + reviewId + '/investigations', investigationForm, this.httpOptions
+    );
+  }
+
+  listInvestigations(reviewId: string): Observable<Investigation[]> {
+    return this.http.get<Investigation[]>(this.apiUrl + '/' + reviewId + '/investigations', this.httpOptions);
+  }
+
+  getInvestigation(reviewId: string, investigationId: string) {
+    return this.http.get<Investigation>(
+      this.apiUrl + '/' + reviewId + '/investigations/' + investigationId, this.httpOptions
+    );
   }
 }

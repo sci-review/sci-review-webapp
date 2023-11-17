@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input, signal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -10,11 +10,16 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { Router, RouterLink } from "@angular/router";
 import { ReviewService } from "../../../services/review.service";
 import { handleServerErrors } from "../../../../common/handler-error";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatSelectModule } from "@angular/material/select";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
+import { Review } from "../../../models/review.model";
 
 @Component({
   selector: 'app-review-form',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatProgressBarModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatProgressBarModule, ReactiveFormsModule, RouterLink, MatToolbarModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule],
   templateUrl: './review-form.component.html',
   styleUrl: './review-form.component.scss'
 })
