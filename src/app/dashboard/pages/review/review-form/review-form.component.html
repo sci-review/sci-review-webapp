@@ -1,0 +1,52 @@
+<div class="content-center">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>New Review</mat-card-title>
+      <mat-card-subtitle>Complete the form below to create a new Review</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" id="myForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title">
+          <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
+          <mat-error *ngIf="hasError('title', 'minlength')">Title must be at least 3 characters</mat-error>
+          <mat-error *ngIf="hasError('title', 'maxlength')">Title must be less than 255 characters</mat-error>
+          <mat-error *ngIf="hasError('title', 'serverError')">
+            {{ this.form.controls['title'].errors?.['serverError'] }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Type</mat-label>
+          <input matInput formControlName="type">
+          <mat-error *ngIf="hasError('type', 'required')">Type is required</mat-error>
+          <mat-error *ngIf="hasError('type', 'serverError')">
+            {{ this.form.controls['type'].errors?.['serverError'] }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date</mat-label>
+          <input matInput formControlName="startDate">
+          <mat-error *ngIf="hasError('startDate', 'required')">Start Date is required</mat-error>
+          <mat-error *ngIf="hasError('startDate', 'serverError')">
+            {{ this.form.controls['startDate'].errors?.['serverError'] }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>End Date</mat-label>
+          <input matInput formControlName="endDate">
+          <mat-error *ngIf="hasError('endDate', 'required')">End Date is required</mat-error>
+          <mat-error *ngIf="hasError('endDate', 'serverError')">
+            {{ this.form.controls['endDate'].errors?.['serverError'] }}
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button form="myForm" type="submit" mat-flat-button color="primary">Save</button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</div>

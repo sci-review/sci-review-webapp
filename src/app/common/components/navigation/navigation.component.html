@@ -1,0 +1,52 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>SCI-Review</mat-toolbar>
+    <mat-nav-list (click)="closeDrawer()">
+      <a mat-list-item routerLink="reviews" routerLinkActive="active">Reviews</a>
+      <a mat-list-item routerLink="reviews/new" routerLinkActive="active">New Review</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span></span>
+
+      <span style="flex: 1 1 auto;"></span>
+
+      <ng-container *appIsAdmin>
+        <button class="user-button" mat-icon-button [matMenuTriggerFor]="adminMenu">
+          <mat-icon>admin_panel_settings</mat-icon>
+        </button>
+        <mat-menu #adminMenu="matMenu" xPosition="before">
+          <button mat-menu-item routerLink="users">Users</button>
+          <button mat-menu-item routerLink="settings">Settings</button>
+        </mat-menu>
+      </ng-container>
+
+      <button class="user-button" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item routerLink="profile">Profile</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <ng-container *ngIf="appStore.loading()">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+
+    <router-outlet></router-outlet>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

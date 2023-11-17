@@ -10,3 +10,7 @@ export interface TokenResponse {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface LogoutForm {
+  refreshToken: string;
+}

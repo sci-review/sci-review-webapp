@@ -4,12 +4,12 @@ import { NavigationComponent } from "../../../common/components/navigation/navig
 import { RouterOutlet } from "@angular/router";
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, NavigationComponent, RouterOutlet],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    imports: [CommonModule, NavigationComponent, RouterOutlet],
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.scss'
 })
-export class HomeComponent {
+export class DashboardComponent {
 
 }

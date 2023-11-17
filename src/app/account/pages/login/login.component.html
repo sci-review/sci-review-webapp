@@ -10,7 +10,7 @@
           <mat-label>Email</mat-label>
           <input matInput formControlName="email">
           <mat-icon matSuffix>email</mat-icon>
-          <mat-error *ngIf="hasError('email', 'required')">Address is required</mat-error>
+          <mat-error *ngIf="hasError('email', 'required')">E-mail is required</mat-error>
           <mat-error *ngIf="hasError('email', 'email')">Invalid e-mail</mat-error>
           <mat-error *ngIf="hasError('email', 'serverError')">
             {{ this.form.controls['email'].errors?.['serverError'] }}
