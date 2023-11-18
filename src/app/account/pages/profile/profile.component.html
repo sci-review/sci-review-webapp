@@ -10,4 +10,41 @@
       <p><strong>Role:</strong> {{ user?.role }}</p>
     </mat-card-content>
   </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Change Password</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="success" class="success">Password changed successfully</p>
+      <p *ngIf="errors" class="error">{{ errors.title }}</p>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" id="myForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Current Password</mat-label>
+          <input matInput type="password" formControlName="currentPassword">
+          <mat-icon matSuffix>password</mat-icon>
+          <mat-error>
+            <app-mat-errors fieldName="Current Password" [field]="currentPassword"></app-mat-errors>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>New Password</mat-label>
+          <input matInput type="password" formControlName="newPassword">
+          <mat-icon matSuffix>password</mat-icon>
+          <mat-error>
+            <app-mat-errors fieldName="New Password" [field]="newPassword"></app-mat-errors>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>New Password Confirmation</mat-label>
+          <input matInput type="password" formControlName="passwordConfirmation">
+          <mat-icon matSuffix>password</mat-icon>
+          <mat-error>
+            <app-mat-errors fieldName="New Password Confirmation" [field]="passwordConfirmation"></app-mat-errors>
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Change Password</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

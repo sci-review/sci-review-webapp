@@ -14,3 +14,8 @@ export interface TokenResponse {
 export interface LogoutForm {
   refreshToken: string;
 }
+
+export interface ChangePasswordForm {
+  currentPassword: string;
+  newPassword: string;
+}
