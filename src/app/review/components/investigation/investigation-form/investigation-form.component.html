@@ -3,10 +3,8 @@
     <mat-label>Question</mat-label>
     <input matInput formControlName="question" required>
     <button matSuffix mat-button><mat-icon>save</mat-icon>Save</button>
-    <mat-error *ngIf="hasError('question', 'required')">Title is required</mat-error>
-    <mat-error *ngIf="hasError('question', 'minlength')">Title must be at least 3 characters</mat-error>
-    <mat-error *ngIf="hasError('question', 'serverError')">
-      {{ this.form.controls['question'].errors?.['serverError'] }}
+    <mat-error>
+      <app-mat-errors fieldName="Question" [field]="question"></app-mat-errors>
     </mat-error>
   </mat-form-field>
 </form>

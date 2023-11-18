@@ -15,11 +15,12 @@ import { RouterLink } from "@angular/router";
 import { ReviewService } from "../../../services/review.service";
 import { handleServerErrors } from "../../../../common/handler-error";
 import { Investigation } from "../../../models/review.model";
+import { MatErrorsComponent } from "../../../../common/components/mat-errors/mat-errors.component";
 
 @Component({
   selector: 'app-investigation-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatButtonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatOptionModule, MatProgressBarModule, MatSelectModule, MatToolbarModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, MatButtonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatOptionModule, MatProgressBarModule, MatSelectModule, MatToolbarModule, ReactiveFormsModule, RouterLink, MatErrorsComponent],
   templateUrl: './investigation-form.component.html',
   styleUrl: './investigation-form.component.scss'
 })
@@ -34,6 +35,10 @@ export class InvestigationFormComponent {
     this.form = new FormGroup({
       question: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(255),]),
     })
+  }
+
+  get question() {
+    return <FormControl<any>> this.form.get('question')!!;
   }
 
   onSubmit() {
