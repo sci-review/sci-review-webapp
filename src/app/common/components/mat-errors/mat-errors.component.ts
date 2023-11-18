@@ -23,8 +23,10 @@ export class MatErrorsComponent {
       return `${this.fieldName} must be a valid email address`
     } else if (this.field.errors?.['nomatch']) {
       return `${this.fieldName} must match password`
+    } else if (this.field.errors?.['serverError']) {
+      return `Server Error: ${this.field.errors?.['serverError']}`
     } else {
-      return 'Field must be a serverError serverError serverError'
+      return `${this.fieldName}: invalid`
     }
   }
 }

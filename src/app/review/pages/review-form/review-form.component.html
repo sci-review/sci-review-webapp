@@ -13,11 +13,8 @@
           <mat-form-field appearance="outline">
             <mat-label>Title</mat-label>
             <input matInput formControlName="title">
-            <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
-            <mat-error *ngIf="hasError('title', 'minlength')">Title must be at least 3 characters</mat-error>
-            <mat-error *ngIf="hasError('title', 'maxlength')">Title must be less than 255 characters</mat-error>
-            <mat-error *ngIf="hasError('title', 'serverError')">
-              {{ this.form.controls['title'].errors?.['serverError'] }}
+            <mat-error>
+              <app-mat-errors fieldName="Title" [field]="title"></app-mat-errors>
             </mat-error>
           </mat-form-field>
 
@@ -28,9 +25,8 @@
               <mat-option value="ScopingReview">Scoping Review</mat-option>
               <mat-option value="RapidReview">Rapid Review</mat-option>
             </mat-select>
-            <mat-error *ngIf="hasError('type', 'required')">Type is required</mat-error>
-            <mat-error *ngIf="hasError('type', 'serverError')">
-              {{ this.form.controls['type'].errors?.['serverError'] }}
+            <mat-error>
+              <app-mat-errors fieldName="Type" [field]="type"></app-mat-errors>
             </mat-error>
           </mat-form-field>
 
@@ -42,34 +38,13 @@
             </mat-date-range-input>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
-
-<!--            @if (form.controls.start.hasError('matStartDateInvalid')) {-->
-<!--            <mat-error>Invalid start date</mat-error>-->
-<!--            }-->
-<!--            @if (range.controls.end.hasError('matEndDateInvalid')) {-->
-<!--            <mat-error>Invalid end date</mat-error>-->
-<!--            }-->
+            <mat-error>
+              <app-mat-errors fieldName="Start Date" [field]="startDate"></app-mat-errors>
+            </mat-error>
+            <mat-error>
+              <app-mat-errors fieldName="End Date" [field]="endDate"></app-mat-errors>
+            </mat-error>
           </mat-form-field>
-
-
-
-
-<!--          <mat-form-field appearance="outline">-->
-<!--            <mat-label>Start Date</mat-label>-->
-<!--            <input matInput formControlName="startDate">-->
-<!--            <mat-error *ngIf="hasError('startDate', 'required')">Start Date is required</mat-error>-->
-<!--            <mat-error *ngIf="hasError('startDate', 'serverError')">-->
-<!--              {{ this.form.controls['startDate'].errors?.['serverError'] }}-->
-<!--            </mat-error>-->
-<!--          </mat-form-field>-->
-<!--          <mat-form-field appearance="outline">-->
-<!--            <mat-label>End Date</mat-label>-->
-<!--            <input matInput formControlName="endDate">-->
-<!--            <mat-error *ngIf="hasError('endDate', 'required')">End Date is required</mat-error>-->
-<!--            <mat-error *ngIf="hasError('endDate', 'serverError')">-->
-<!--              {{ this.form.controls['endDate'].errors?.['serverError'] }}-->
-<!--            </mat-error>-->
-<!--          </mat-form-field>-->
         </form>
       </mat-card-content>
       <mat-card-actions>

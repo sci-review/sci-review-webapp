@@ -15,11 +15,12 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { Review } from "../../models/review.model";
+import { MatErrorsComponent } from "../../../common/components/mat-errors/mat-errors.component";
 
 @Component({
   selector: 'app-review-form',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatProgressBarModule, ReactiveFormsModule, RouterLink, MatToolbarModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatProgressBarModule, ReactiveFormsModule, RouterLink, MatToolbarModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatErrorsComponent],
   templateUrl: './review-form.component.html',
   styleUrl: './review-form.component.scss'
 })
@@ -36,6 +37,22 @@ export class ReviewFormComponent {
       startDate: new FormControl('', [Validators.required,]),
       endDate: new FormControl('', [Validators.required,]),
     })
+  }
+
+  get title() {
+    return <FormControl<any>> this.form.get('title')!!;
+  }
+
+  get type() {
+    return <FormControl<any>> this.form.get('type')!!;
+  }
+
+  get startDate() {
+    return <FormControl<any>> this.form.get('startDate')!!;
+  }
+
+  get endDate() {
+    return <FormControl<any>> this.form.get('endDate')!!;
   }
 
   onSubmit() {
@@ -55,8 +72,5 @@ export class ReviewFormComponent {
           handleServerErrors(error, this.form);
         }
       });
-  }
-  hasError(name: string, err: string) {
-    return this.form.controls[name].hasError(err);
   }
 }
