@@ -47,7 +47,6 @@ export class InvestigationFormComponent {
         next: (investigation) => {
           this.loading = false;
           this.investigations.update((investigations) => [...investigations, investigation]);
-          console.log(investigation)
         },
         error: (error) => {
           this.loading = false;

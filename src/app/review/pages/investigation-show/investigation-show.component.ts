@@ -8,12 +8,12 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { RouterLink } from "@angular/router";
 import {
   InvestigationsComponent
-} from "../../../dashboard/components/investigation/investigations/investigations.component";
+} from "../../components/investigation/investigations/investigations.component";
 import { MatCardModule } from "@angular/material/card";
 import { MatTabsModule } from "@angular/material/tabs";
 import { AppStoreService } from "../../../account/services/app-store.service";
-import { Investigation } from "../../../dashboard/models/review.model";
-import { ReviewService } from "../../../dashboard/services/review.service";
+import { Investigation } from "../../models/review.model";
+import { ReviewService } from "../../services/review.service";
 
 @Component({
   selector: 'app-investigation-show',

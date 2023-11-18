@@ -1,8 +1,8 @@
 import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppStoreService } from "../../../../account/services/app-store.service";
-import { ReviewService } from "../../../services/review.service";
-import { Review } from "../../../models/review.model";
+import { AppStoreService } from "../../../account/services/app-store.service";
+import { ReviewService } from "../../services/review.service";
+import { Review } from "../../models/review.model";
 import { Router, RouterLink } from "@angular/router";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
@@ -12,7 +12,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
 import { MatMenuModule } from "@angular/material/menu";
-import { InvestigationsComponent } from "../../../components/investigation/investigations/investigations.component";
+import { InvestigationsComponent } from "../../components/investigation/investigations/investigations.component";
 
 @Component({
   selector: 'app-review-show',
@@ -33,7 +33,6 @@ export class ReviewShowComponent {
       next: (review) => {
         this.appStoreService.setLoading(false);
         this.review = review;
-        console.log(review);
       },
       error: (error) => {
         this.appStoreService.setLoading(false);

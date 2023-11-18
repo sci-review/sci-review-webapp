@@ -3,9 +3,9 @@ import { RegisterComponent } from "./account/pages/register/register.component";
 import { LoginComponent } from "./account/pages/login/login.component";
 import { HomeComponent } from "./dashboard/pages/home/home.component";
 import { authGuard } from "./account/guards/auth.guard";
-import { ReviewListComponent } from "./dashboard/pages/review/review-list/review-list.component";
-import { ReviewShowComponent } from "./dashboard/pages/review/review-show/review-show.component";
-import { ReviewFormComponent } from "./dashboard/pages/review/review-form/review-form.component";
+import { ReviewListComponent } from "./review/pages/review-list/review-list.component";
+import { ReviewShowComponent } from "./review/pages/review-show/review-show.component";
+import { ReviewFormComponent } from "./review/pages/review-form/review-form.component";
 import { DashboardComponent } from "./dashboard/pages/dashboard/dashboard.component";
 import { InvestigationShowComponent } from "./review/pages/investigation-show/investigation-show.component";
 

@@ -8,13 +8,13 @@ import { MatInputModule } from "@angular/material/input";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
-import { ReviewService } from "../../../services/review.service";
-import { handleServerErrors } from "../../../../common/handler-error";
+import { ReviewService } from "../../services/review.service";
+import { handleServerErrors } from "../../../common/handler-error";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSelectModule } from "@angular/material/select";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
-import { Review } from "../../../models/review.model";
+import { Review } from "../../models/review.model";
 
 @Component({
   selector: 'app-review-form',
@@ -46,9 +46,9 @@ export class ReviewFormComponent {
 
     this.reviewService.new(this.form.value)
       .subscribe({
-        next: () => {
+        next: (review: Review) => {
           this.loading = false;
-          this.router.navigate(['dashboard', 'reviews'])
+          this.router.navigate(['dashboard', 'reviews', review.id])
         },
         error: (error) => {
           this.loading = false;

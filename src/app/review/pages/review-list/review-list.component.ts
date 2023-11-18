@@ -1,8 +1,8 @@
 import { Component, computed, inject, Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReviewService } from "../../../services/review.service";
-import { AppStoreService } from "../../../../account/services/app-store.service";
-import { Review } from "../../../models/review.model";
+import { ReviewService } from "../../services/review.service";
+import { AppStoreService } from "../../../account/services/app-store.service";
+import { Review } from "../../models/review.model";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
 import { Router, RouterLink } from "@angular/router";
