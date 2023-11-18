@@ -79,6 +79,7 @@ export class ProfileComponent extends BaseComponent {
           this.success = false;
           this.errors = error.error;
           this.resetForm();
+          handleServerErrors(error, this.form);
         }
       });
   }
