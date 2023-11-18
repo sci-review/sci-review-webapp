@@ -31,8 +31,8 @@ export interface Review {
   ownerId: string;
   title: string;
   type: ReviewType;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   archived: boolean;
   created_at: string;
   updated_at: string;

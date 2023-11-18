@@ -16,11 +16,13 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { Review } from "../../models/review.model";
 import { MatErrorsComponent } from "../../../common/components/mat-errors/mat-errors.component";
+import { HttpErrorResponse } from "@angular/common/http";
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
 @Component({
   selector: 'app-review-form',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatProgressBarModule, ReactiveFormsModule, RouterLink, MatToolbarModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatErrorsComponent],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatProgressBarModule, ReactiveFormsModule, RouterLink, MatToolbarModule, MatSelectModule, MatDatepickerModule, MatMomentDateModule, MatErrorsComponent],
   templateUrl: './review-form.component.html',
   styleUrl: './review-form.component.scss'
 })
@@ -29,6 +31,8 @@ export class ReviewFormComponent {
   reviewService = inject(ReviewService)
   loading = false;
   form: FormGroup;
+  review: Review | null = null;
+  @Input() reviewId: string | null = null;
 
   constructor() {
     this.form = new FormGroup({
@@ -36,7 +40,19 @@ export class ReviewFormComponent {
       type: new FormControl('', [Validators.required, ], ),
       startDate: new FormControl('', [Validators.required,]),
       endDate: new FormControl('', [Validators.required,]),
-    })
+    });
+  }
+
+  ngOnInit() {
+    if (this.reviewId) {
+      this.reviewService.show(this.reviewId)
+        .subscribe({
+          next: (review: Review) => {
+            console.log(review)
+            this.form.patchValue(review);
+          }
+        })
+    }
   }
 
   get title() {
@@ -61,16 +77,36 @@ export class ReviewFormComponent {
     }
     this.loading = true;
 
+    if (this.reviewId) {
+      this.updateReview();
+    } else {
+      this.newReview();
+    }
+  }
+
+  updateReview() {
+    this.reviewService.update(this.reviewId!!, this.form.value)
+      .subscribe({
+        next: (review: Review) => this.handleSuccess(review),
+        error: (error) => this.handleError(error)
+      });
+  }
+
+  newReview() {
     this.reviewService.new(this.form.value)
       .subscribe({
-        next: (review: Review) => {
-          this.loading = false;
-          this.router.navigate(['dashboard', 'reviews', review.id])
-        },
-        error: (error) => {
-          this.loading = false;
-          handleServerErrors(error, this.form);
-        }
+        next: (review: Review) => this.handleSuccess(review),
+        error: (error) => this.handleError(error)
       });
+  }
+
+  handleSuccess(review: Review) {
+    this.loading = false;
+    this.router.navigate(['dashboard', 'reviews', review.id])
+  }
+
+  handleError(error: HttpErrorResponse) {
+    this.loading = false;
+    handleServerErrors(error, this.form);
   }
 }

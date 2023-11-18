@@ -7,6 +7,7 @@ import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import { accessTokenInterceptor } from "./account/interceptors/access-token.interceptor";
 import { unauthorizedErrorInterceptor } from "./account/interceptors/unauthorized-error.interceptor";
 import { forbiddenErrorInterceptor } from "./account/interceptors/forbidden-error.interceptor";
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from "@angular/material-moment-adapter";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +23,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: 'MAT_DATE_LOCALE',
       useValue: 'en-US'
+    },
+    {
+      provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+      useValue: { useUtc: true }
     }
   ]
 };

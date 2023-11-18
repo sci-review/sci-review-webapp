@@ -50,6 +50,10 @@ export const routes: Routes = [
         component: ReviewShowComponent,
       },
       {
+        path: 'reviews/:reviewId/edit',
+        component: ReviewFormComponent,
+      },
+      {
         path: 'reviews/:reviewId/investigations/:investigationId',
         component: InvestigationShowComponent,
       },

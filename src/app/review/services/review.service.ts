@@ -42,4 +42,9 @@ export class ReviewService extends BaseService {
       this.apiUrl + '/' + reviewId + '/investigations/' + investigationId, this.httpOptions
     );
   }
+
+  update(reviewId: string, reviewForm: ReviewForm): Observable<Review> {
+    return this.http.put<Review>(this.apiUrl + '/' + reviewId, reviewForm, this.httpOptions);
+
+  }
 }
