@@ -13,11 +13,11 @@ import { handleServerErrors } from "../../../common/handler-error";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSelectModule } from "@angular/material/select";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatNativeDateModule } from "@angular/material/core";
 import { Review } from "../../models/review.model";
 import { MatErrorsComponent } from "../../../common/components/mat-errors/mat-errors.component";
 import { HttpErrorResponse } from "@angular/common/http";
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import moment from "moment/moment";
 
 @Component({
   selector: 'app-review-form',
@@ -31,8 +31,9 @@ export class ReviewFormComponent {
   reviewService = inject(ReviewService)
   loading = false;
   form: FormGroup;
-  review: Review | null = null;
-  @Input() reviewId: string | null = null;
+  @Input() reviewId: string | null = null
+  days = 0
+  weeks = 0;
 
   constructor() {
     this.form = new FormGroup({
@@ -48,8 +49,8 @@ export class ReviewFormComponent {
       this.reviewService.show(this.reviewId)
         .subscribe({
           next: (review: Review) => {
-            console.log(review)
             this.form.patchValue(review);
+            this.updateDaysAndWeeks(review.startDate, review.endDate);
           }
         })
     }
@@ -108,5 +109,17 @@ export class ReviewFormComponent {
   handleError(error: HttpErrorResponse) {
     this.loading = false;
     handleServerErrors(error, this.form);
+  }
+
+  endDateChange() {
+    if (this.endDate.value !== null) {
+      this.updateDaysAndWeeks(this.startDate.value, this.endDate.value);
+    }
+  }
+
+  updateDaysAndWeeks(startDate: moment.Moment, endDate: moment.Moment) {
+    const cloneStartDate = endDate.clone().add(1, 'days');
+    this.days = cloneStartDate.diff(startDate, 'days');
+    this.weeks = cloneStartDate.diff(startDate, 'weeks');
   }
 }

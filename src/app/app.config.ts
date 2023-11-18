@@ -24,9 +24,7 @@ export const appConfig: ApplicationConfig = {
       provide: 'MAT_DATE_LOCALE',
       useValue: 'en-US'
     },
-    {
-      provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-      useValue: { useUtc: true }
-    }
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
+
   ]
 };

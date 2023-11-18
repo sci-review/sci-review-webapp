@@ -1,3 +1,5 @@
+import moment from "moment/moment";
+
 export interface ReviewForm {
   title: string;
   type: ReviewType;
@@ -31,8 +33,8 @@ export interface Review {
   ownerId: string;
   title: string;
   type: ReviewType;
-  startDate: Date;
-  endDate: Date;
+  startDate: moment.Moment;
+  endDate: moment.Moment;
   archived: boolean;
   created_at: string;
   updated_at: string;
@@ -40,6 +42,19 @@ export interface Review {
   investigations: Investigation[];
 }
 
+export interface ReviewerResponse {
+  id: string;
+  ownerId: string;
+  title: string;
+  type: ReviewType;
+  startDate: string;
+  endDate: string;
+  archived: boolean;
+  created_at: string;
+  updated_at: string;
+  reviewers: Reviewer[];
+  investigations: Investigation[];
+}
 
 export interface InvestigationForm {
   question: string;

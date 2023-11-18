@@ -3,7 +3,9 @@ import { BaseService } from "../../common/services/base.service";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
-import { Investigation, InvestigationForm, Review, ReviewForm } from "../models/review.model";
+import { Investigation, InvestigationForm, Review, ReviewerResponse, ReviewForm } from "../models/review.model";
+import { map } from "rxjs/operators";
+import moment from 'moment/moment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,10 @@ export class ReviewService extends BaseService {
   }
 
   show(reviewId: string): Observable<Review> {
-    return this.http.get<Review>(this.apiUrl + '/' + reviewId, this.httpOptions);
+    return this.http.get<ReviewerResponse>(this.apiUrl + '/' + reviewId, this.httpOptions)
+      .pipe(
+        map((reviewResponse) => this.mapReviewResponseToReview(reviewResponse))
+      );
   }
 
   newInvestigationQuestion(reviewId: string, investigationForm: InvestigationForm): Observable<Investigation> {
@@ -46,5 +51,21 @@ export class ReviewService extends BaseService {
   update(reviewId: string, reviewForm: ReviewForm): Observable<Review> {
     return this.http.put<Review>(this.apiUrl + '/' + reviewId, reviewForm, this.httpOptions);
 
+  }
+
+  private mapReviewResponseToReview(reviewResponse: ReviewerResponse) {
+    return {
+      id: reviewResponse.id,
+      ownerId: reviewResponse.ownerId,
+      title: reviewResponse.title,
+      type: reviewResponse.type,
+      startDate: moment.utc(reviewResponse.startDate),
+      endDate: moment.utc(reviewResponse.endDate),
+      archived: reviewResponse.archived,
+      created_at: reviewResponse.created_at,
+      updated_at: reviewResponse.updated_at,
+      reviewers: reviewResponse.reviewers,
+      investigations: reviewResponse.investigations,
+    }
   }
 }

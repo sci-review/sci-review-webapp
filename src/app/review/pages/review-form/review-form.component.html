@@ -34,7 +34,7 @@
             <mat-label>Review Period</mat-label>
             <mat-date-range-input [rangePicker]="picker">
               <input matStartDate formControlName="startDate" placeholder="Start date">
-              <input matEndDate formControlName="endDate" placeholder="End date">
+              <input matEndDate formControlName="endDate" placeholder="End date" (dateChange)="endDateChange()">
             </mat-date-range-input>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
@@ -45,6 +45,8 @@
               <app-mat-errors fieldName="End Date" [field]="endDate"></app-mat-errors>
             </mat-error>
           </mat-form-field>
+          <p><b>Number of days: </b> {{ days }}</p>
+          <p><b>Number of weeks: </b> {{ weeks }}</p>
         </form>
       </mat-card-content>
       <mat-card-actions>
