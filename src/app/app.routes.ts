@@ -8,6 +8,7 @@ import { ReviewShowComponent } from "./review/pages/review-show/review-show.comp
 import { ReviewFormComponent } from "./review/pages/review-form/review-form.component";
 import { DashboardComponent } from "./dashboard/pages/dashboard/dashboard.component";
 import { InvestigationShowComponent } from "./review/pages/investigation-show/investigation-show.component";
+import { ProfileComponent } from "./account/pages/profile/profile.component";
 
 export const routes: Routes = [
   {
@@ -31,6 +32,10 @@ export const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
       },
       {
         path: 'reviews',

@@ -28,4 +28,8 @@ export class AppStoreService {
   setLoading(value: boolean): void {
     this._loading.set(value);
   }
+
+  get loggedInUserValue(): TokenResponse | null {
+    return this._loggedInUser();
+  }
 }
