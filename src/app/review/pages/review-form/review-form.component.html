@@ -3,7 +3,8 @@
     <button mat-icon-button routerLink="/dashboard/reviews">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <h1 class="mat-subheader">New review</h1>
+    <h1 *ngIf="reviewId" class="mat-subheader">Edit Review</h1>
+    <h1 *ngIf="!reviewId" class="mat-subheader">New review</h1>
     <span class="example-spacer"></span>
   </mat-toolbar>
   <div class="app-content-main">
