@@ -1,6 +1,7 @@
 <button mat-flat-button color="primary" (click)="onNewKeyword()">New Keyword</button>
 <mat-divider></mat-divider>
 <div>
+  <p *ngIf="keywords().length == 0"> No keywords</p>
   <ng-container *ngFor="let keyword of keywords()">
     <mat-card appearance="outlined">
       <mat-card-content>
@@ -9,6 +10,10 @@
           <b>OR</b> ({{ keyword.synonyms.join(', ') }})
         </ng-container>
       </mat-card-content>
+      <mat-card-actions class="mat-card-actions-align-end">
+        <button mat-button color="primary" (click)="onEditKeyword(keyword)">Edit</button>
+        <button mat-button color="warn" (click)="onDeleteKeyword(keyword)">Delete</button>
+      </mat-card-actions>
     </mat-card>
     <p><b>AND</b></p>
   </ng-container>

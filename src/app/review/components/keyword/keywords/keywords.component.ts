@@ -6,12 +6,13 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
 import { ReviewService } from "../../../services/review.service";
-import { Investigation, InvestigationKeyword } from "../../../models/review.model";
+import { InvestigationKeyword } from "../../../models/review.model";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-keywords',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatDividerModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatDividerModule, MatIconModule],
   templateUrl: './keywords.component.html',
   styleUrl: './keywords.component.scss'
 })
@@ -37,10 +38,43 @@ export class KeywordsComponent {
 
   onNewKeyword() {
     this.dialogRef = this.dialog.open(KeywordFormComponent, {
-      data: { mode: 'create', reviewId: this.reviewId, investigationId: this.investigationId }
+      data: { reviewId: this.reviewId, investigationId: this.investigationId, keyword: null }
     });
     this.dialogRef.afterClosed().subscribe({
       next: (keyword) => {
+        if (!keyword) return;
+        this.keywords.update((keywords) => [...keywords, keyword]);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  onDeleteKeyword(keyword: InvestigationKeyword) {
+    this.reviewService.deleteInvestigationKeyword(this.reviewId, this.investigationId, keyword.id).subscribe({
+      next: () => {
+        this.keywords.update((keywords) => keywords.filter((key) => key.id !== keyword.id));
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  onEditKeyword(keyword: InvestigationKeyword) {
+    this.dialogRef = this.dialog.open(KeywordFormComponent, {
+      data: { reviewId: this.reviewId, investigationId: this.investigationId, keyword: keyword }
+    });
+    this.dialogRef.afterClosed().subscribe({
+      next: (keyword) => {
+        if (!keyword) return;
+
+        const index = this.keywords().findIndex((key) => key.id === keyword.id);
+        if (index !== -1) {
+          this.keywords.update((keywords) => [...keywords.slice(0, index), keyword, ...keywords.slice(index + 1)])
+          return;
+        }
         this.keywords.update((keywords) => [...keywords, keyword]);
       },
       error: (err) => {

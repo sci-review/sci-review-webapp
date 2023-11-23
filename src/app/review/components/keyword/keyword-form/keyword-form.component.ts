@@ -42,10 +42,12 @@ export class KeywordFormComponent {
 
   constructor(
     public dialogRef: MatDialogRef<KeywordFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { mode: string, reviewId: string, investigationId: string}
+    @Inject(MAT_DIALOG_DATA) public data: { reviewId: string, investigationId: string, keyword: InvestigationKeyword | null }
   ) {
+    this.synonyms = data.keyword ? data.keyword.synonyms.map((s) => ({ text: s })) : [];
+    const word = data.keyword ? data.keyword.word : '';
     this.form = new FormGroup({
-      word: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(255),]),
+      word: new FormControl(word, [Validators.required, Validators.minLength(3), Validators.maxLength(255),]),
     })
   }
 
@@ -54,15 +56,35 @@ export class KeywordFormComponent {
   }
 
   onSubmit() {
-    console.log(this.form.value, this.synonyms);
+    if (this.form.invalid) {
+      return;
+    }
 
     const investigationKeyword: KeywordForm = {
       word: this.form.value.word,
       synonyms: this.synonyms.map((synonym) => synonym.text)
     }
 
-    this.loading = true;
+    if (this.data.keyword) {
+      this.updateKeyword(investigationKeyword);
+    } else {
+      this.newKeyword(investigationKeyword);
+    }
+
+  }
+
+  private newKeyword(investigationKeyword: KeywordForm) {
     this.reviewService.newInvestigationKeyword(this.data.reviewId, this.data.investigationId, investigationKeyword)
+      .subscribe({
+        next: (investigationKeyword) => this.dialogRef.close(investigationKeyword),
+        error: (error) => {
+          console.error(error);
+        }
+      });
+  }
+
+  private updateKeyword(investigationKeyword: KeywordForm) {
+    this.reviewService.updateInvestigationKeyword(this.data.reviewId, this.data.investigationId, this.data.keyword!!.id, investigationKeyword)
       .subscribe({
         next: (investigationKeyword) => this.dialogRef.close(investigationKeyword),
         error: (error) => {
@@ -104,4 +126,6 @@ export class KeywordFormComponent {
       this.synonyms[index].text = value;
     }
   }
+
+
 }

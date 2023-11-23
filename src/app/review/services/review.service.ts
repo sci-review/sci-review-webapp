@@ -73,6 +73,11 @@ export class ReviewService extends BaseService {
     return this.http.get<InvestigationKeyword[]>(url, this.httpOptions);
   }
 
+  deleteInvestigationKeyword(reviewId: string,investigationId: string, keywordId: string): Observable<void> {
+    const url = `${this.apiUrl}/${reviewId}/investigations/${investigationId}/keywords/${keywordId}`;
+    return this.http.delete<void>(url, this.httpOptions);
+  }
+
   private mapReviewResponseToReview(reviewResponse: ReviewerResponse) {
     return {
       id: reviewResponse.id,
@@ -87,5 +92,10 @@ export class ReviewService extends BaseService {
       reviewers: reviewResponse.reviewers,
       investigations: reviewResponse.investigations,
     }
+  }
+
+  updateInvestigationKeyword(reviewId: string, investigationId: string, keywordId: string, investigationKeyword: KeywordForm) {
+    const url = `${this.apiUrl}/${reviewId}/investigations/${investigationId}/keywords/${keywordId}`;
+    return this.http.put<InvestigationKeyword>(url, investigationKeyword, this.httpOptions);
   }
 }
