@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>New Keyword</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" id="myForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Keyword</mat-label>
+      <input matInput formControlName="word" required>
+      <mat-error>
+        <app-mat-errors fieldName="word" [field]="word"></app-mat-errors>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="synonyms-chip-list">
+      <mat-label>Synonyms</mat-label>
+      <mat-chip-grid #chipGrid aria-label="Enter synonyms">
+        <mat-chip-row *ngFor="let synonym of synonyms"
+                      (removed)="remove(synonym)"
+                      [editable]="true"
+                      (edited)="edit(synonym, $event)"
+                      [aria-description]="'press enter to edit ' + synonym.text">
+          {{synonym.text}}
+          <button matChipRemove [attr.aria-label]="'remove ' + synonym.text">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+        <input placeholder="New synonym"
+               [matChipInputFor]="chipGrid"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="add($event)"/>
+      </mat-chip-grid>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button color="primary" form="myForm">Save</button>
+</div>
+
+

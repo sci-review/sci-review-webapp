@@ -15,11 +15,13 @@ import { AppStoreService } from "../../../account/services/app-store.service";
 import { Investigation } from "../../models/review.model";
 import { ReviewService } from "../../services/review.service";
 import { InvestigationStatusPipe } from "../../pipes/investigation-status.pipe";
+import { KeywordFormComponent } from "../../components/keyword/keyword-form/keyword-form.component";
+import { KeywordsComponent } from "../../components/keyword/keywords/keywords.component";
 
 @Component({
   selector: 'app-investigation-show',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule, MatToolbarModule, RouterLink, InvestigationsComponent, MatCardModule, MatTabsModule, InvestigationStatusPipe],
+  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule, MatToolbarModule, RouterLink, InvestigationsComponent, MatCardModule, MatTabsModule, InvestigationStatusPipe, KeywordFormComponent, KeywordsComponent],
   templateUrl: './investigation-show.component.html',
   styleUrl: './investigation-show.component.scss'
 })

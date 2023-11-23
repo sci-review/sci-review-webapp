@@ -78,3 +78,18 @@ export enum InvestigationStatus {
   DoNotProceed = "DoNotProceed",
   Cancelled = "Cancelled",
 }
+
+export interface KeywordForm {
+  word: string;
+  synonyms: string[];
+}
+
+export interface InvestigationKeyword {
+  id: string;
+  userId: string;
+  investigationId: string;
+  word: string;
+  synonyms: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}

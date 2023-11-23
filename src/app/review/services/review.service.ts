@@ -3,7 +3,14 @@ import { BaseService } from "../../common/services/base.service";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
-import { Investigation, InvestigationForm, Review, ReviewerResponse, ReviewForm } from "../models/review.model";
+import {
+  Investigation,
+  InvestigationForm, InvestigationKeyword,
+  KeywordForm,
+  Review,
+  ReviewerResponse,
+  ReviewForm
+} from "../models/review.model";
 import { map } from "rxjs/operators";
 import moment from 'moment/moment';
 
@@ -50,7 +57,20 @@ export class ReviewService extends BaseService {
 
   update(reviewId: string, reviewForm: ReviewForm): Observable<Review> {
     return this.http.put<Review>(this.apiUrl + '/' + reviewId, reviewForm, this.httpOptions);
+  }
 
+  newInvestigationKeyword(
+    reviewId: string,
+    investigationId: string,
+    keyword: KeywordForm
+  ): Observable<InvestigationKeyword> {
+    const url = `${this.apiUrl}/${reviewId}/investigations/${investigationId}/keywords`;
+    return this.http.post<InvestigationKeyword>(url, keyword, this.httpOptions);
+  }
+
+  listInvestigationKeywords(reviewId: string,investigationId: string,): Observable<InvestigationKeyword[]> {
+    const url = `${this.apiUrl}/${reviewId}/investigations/${investigationId}/keywords`;
+    return this.http.get<InvestigationKeyword[]>(url, this.httpOptions);
   }
 
   private mapReviewResponseToReview(reviewResponse: ReviewerResponse) {

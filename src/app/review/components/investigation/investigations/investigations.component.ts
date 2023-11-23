@@ -2,10 +2,9 @@ import { Component, inject, Input, signal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InvestigationFormComponent } from "../investigation-form/investigation-form.component";
 import { Investigation, Review } from "../../../models/review.model";
-import { AppStoreService } from "../../../../account/services/app-store.service";
 import { ReviewService } from "../../../services/review.service";
 import { MatCardModule } from "@angular/material/card";
-import { Router, RouterLink } from "@angular/router";
+import { RouterLink } from "@angular/router";
 import { InvestigationStatusPipe } from "../../../pipes/investigation-status.pipe";
 
 @Component({
