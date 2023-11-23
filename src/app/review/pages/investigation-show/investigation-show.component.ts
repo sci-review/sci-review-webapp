@@ -14,11 +14,12 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { AppStoreService } from "../../../account/services/app-store.service";
 import { Investigation } from "../../models/review.model";
 import { ReviewService } from "../../services/review.service";
+import { InvestigationStatusPipe } from "../../pipes/investigation-status.pipe";
 
 @Component({
   selector: 'app-investigation-show',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule, MatToolbarModule, RouterLink, InvestigationsComponent, MatCardModule, MatTabsModule],
+  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule, MatToolbarModule, RouterLink, InvestigationsComponent, MatCardModule, MatTabsModule, InvestigationStatusPipe],
   templateUrl: './investigation-show.component.html',
   styleUrl: './investigation-show.component.scss'
 })

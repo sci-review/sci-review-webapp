@@ -10,7 +10,7 @@
             style="cursor: pointer;">
     <mat-card-header>
       <mat-card-title>{{ investigation.question }}</mat-card-title>
-      <mat-card-subtitle>{{ investigation.status }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ investigation.status | investigationStatus }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
     </mat-card-content>

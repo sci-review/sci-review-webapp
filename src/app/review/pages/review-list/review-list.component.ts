@@ -9,11 +9,12 @@ import { Router, RouterLink } from "@angular/router";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { ReviewFormComponent } from "../review-form/review-form.component";
+import { ReviewTypePipe } from "../../pipes/review-type.pipe";
 
 @Component({
   selector: 'app-review-list',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatIconModule, RouterLink, MatCardModule, MatButtonModule, ReviewFormComponent],
+    imports: [CommonModule, MatToolbarModule, MatIconModule, RouterLink, MatCardModule, MatButtonModule, ReviewFormComponent, ReviewTypePipe],
   templateUrl: './review-list.component.html',
   styleUrl: './review-list.component.scss'
 })

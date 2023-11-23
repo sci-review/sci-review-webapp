@@ -9,7 +9,7 @@
     <mat-card *ngFor="let review of reviews" appearance="outlined" routerLink="{{review.id}}">
       <mat-card-header>
         <mat-card-title>{{ review.title }}</mat-card-title>
-        <mat-card-subtitle>{{ review.type }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ review.type | reviewType }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
       </mat-card-content>

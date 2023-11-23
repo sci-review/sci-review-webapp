@@ -6,11 +6,12 @@ import { AppStoreService } from "../../../../account/services/app-store.service"
 import { ReviewService } from "../../../services/review.service";
 import { MatCardModule } from "@angular/material/card";
 import { Router, RouterLink } from "@angular/router";
+import { InvestigationStatusPipe } from "../../../pipes/investigation-status.pipe";
 
 @Component({
   selector: 'app-investigations',
   standalone: true,
-  imports: [CommonModule, InvestigationFormComponent, MatCardModule, RouterLink],
+  imports: [CommonModule, InvestigationFormComponent, MatCardModule, RouterLink, InvestigationStatusPipe],
   templateUrl: './investigations.component.html',
   styleUrl: './investigations.component.scss'
 })
